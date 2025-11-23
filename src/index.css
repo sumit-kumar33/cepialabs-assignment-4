@@ -25,7 +25,8 @@ a:hover {
 body {
   margin: 0;
   display: flex;
-  place-items: center;
+  flex-direction: column;
+  align-items: stretch;
   min-width: 320px;
   min-height: 100vh;
 }
@@ -65,4 +66,152 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+/* Layout helpers */
+.container {
+  /* Use full available width but keep comfortable gutters */
+  max-width: none;
+  width: 100%;
+  margin: 0;
+  padding: 1.25rem 1rem;
+  box-sizing: border-box;
+}
+
+/* App header */
+.app-header h1 {
+  margin: 0 0 0.25rem 0;
+  font-size: 2rem;
+}
+.muted {
+  color: rgba(255,255,255,0.65);
+  margin: 0;
+}
+
+/* Product catalog */
+.product-catalog .catalog-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.controls {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+.controls input[type="search"] {
+  flex: 1 1 220px;
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.06);
+  background: transparent;
+  color: inherit;
+}
+.controls select {
+  padding: 0.5rem;
+  border-radius: 6px;
+  background: transparent;
+  color: inherit;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.controls .checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.category-buttons {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.category-buttons .chip {
+  padding: 0.45rem 0.65rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.06);
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+.category-buttons .chip:focus {
+  outline: 3px solid rgba(100,108,255,0.25);
+}
+.category-buttons .chip.active {
+  background: #646cff;
+  color: white;
+  border-color: transparent;
+}
+
+.grid {
+  display: grid;
+  /* allow more columns on wide screens, take advantage of full width */
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  align-items: stretch;
+}
+
+/* Ensure grid children stretch so cards are equal-height */
+.grid > div {
+  display: flex;
+}
+
+.product-card {
+  display: flex;
+  flex-direction: column;
+  background: rgba(0,0,0,0.18);
+  border-radius: 8px;
+  overflow: hidden;
+  padding: 0.75rem;
+  width: 100%;
+}
+
+.product-card {
+  /* make the card expand to fill the grid cell's height */
+  height: 100%;
+}
+
+.product-image {
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  border-radius: 6px;
+}
+.product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.product-body {
+  padding: 0.5rem 0;
+}
+.product-body h3 {
+  margin: 0 0 0.25rem 0;
+  font-size: 1.05rem;
+}
+.product-body .price {
+  font-weight: 700;
+  margin: 0.25rem 0;
+}
+.stock.in { color: #7ef59e; }
+.stock.out { color: #ff9a9a; }
+
+.empty-state {
+  grid-column: 1 / -1;
+  padding: 2rem;
+  text-align: center;
+  background: rgba(255,255,255,0.03);
+  border-radius: 8px;
+}
+
+@media (max-width: 900px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 520px) {
+  .grid { grid-template-columns: 1fr; }
+  .product-image img { height: 200px; }
 }
